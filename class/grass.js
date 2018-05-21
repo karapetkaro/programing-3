@@ -1,5 +1,9 @@
-class Grass extends Yndanur {
+var all = require("./yndanur.js");
+ module.exports=class Grass extends all{
 
+    constructor(x, y, index) {
+       super(x, y, index);
+    }
     
     mul() {
         this.multiply++;
