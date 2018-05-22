@@ -1,39 +1,40 @@
-var express = require("express");
+var express = require('express');
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-app.use(express.static("your_project_folder_name"));
+app.use(express.static("public"));
 
 app.get("/", function (req, res) {
-    res.redirect("your_project_html_name");
+    res.redirect("public/index.html");
 });
 
-app.listen(3000, function () {
+server.listen(3000, function () {
     console.log("Example is running on port 3000");
 });
 
-var grass = require("./class/grass.js");
-var gajl = require("./class/gajl.js");
-var oxar = require("./class/ochxar.js");
-var qameljon = require("./class/qamelion.js");
-var mrgjun = require("./class/mrjun.js");
+ grass = require("./class/grass.js");
+ gajl = require("./class/gajl.js");
+ oxar = require("./class/ochxar.js");
+ qameljon = require("./class/qamelion.js");
+ mrgjun = require("./class/mrjun.js");
 
 
 
-var matrix = [];
-var n = 30;
-var m = 30;
-var count = 0;
-
-var grassArr = [];
-var ochxarArr = [];
-var gajlArr = [];
-var qameljonArr = [];
-var mrgjunArr = [];
-var grassQanak = 300;
-var ochxarQanak = 100;
-var gajlQanak = 50;
-var qameljonQanak = 30;
-var mrgjunQanak = 20;
+ matrix = [];
+ n = 30;
+ m = 30;
+ count = 0;
+ grassArr = [];
+ ochxarArr = [];
+ gajlArr = [];
+ qameljonArr = [];
+ mrgjunArr = [];
+ grassQanak = 300;
+ ochxarQanak = 100;
+ gajlQanak = 50;
+ qameljonQanak = 30;
+ mrgjunQanak = 20;
 
 
 
@@ -127,10 +128,10 @@ for (var y = 0; y < matrix.length; ++y) {
 
 
 
-io.socket.on("connection", function () {
+io.on("connection", function () {
     setInterval(merDraw, 2000);
 
-    function merDraw(){
+    function merDraw() {
         for (var i in grassArr) {
             grassArr[i].mul();
 

@@ -57,11 +57,11 @@ function gcel() {
 
 function main() {
     socket = io.connect('http://localhost:3000');
-    socket.on("matrix",gcel);
+    socket.on("matrix", gcel);
 
-    
-    
-    
-} 
+
+
+
+}
 
 window.onload = main;
