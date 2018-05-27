@@ -1,10 +1,11 @@
 var all = require("./yndanur.js");
-module.exports=class mrgjun extends all {
+module.exports = class mrgjun extends all {
 
     constructor(x, y, index) {
         super(x, y, index);
         this.energy = 8;
         this.caneat = true;
+        this.c = 10;
 
     }
     tarmacnel(n) {
@@ -19,14 +20,39 @@ module.exports=class mrgjun extends all {
             [this.x + n, this.y + n]
         ];
     }
-    chooseCell(character, n) {
+    chooseCell(ch, ch1) {
         this.tarmacnel(n);
-        return super.chooseCell(character);
+
+        var found = [];
+        for (var i in this.directions) {
+            var x = this.directions[i][0];
+            var y = this.directions[i][1];
+            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
+                if (matrix[y][x] == ch || matrix[y][x] == ch1) {
+                    found.push(this.directions[i]);
+                }
+            }
+        }
+        return found;
     }
     mul() {
+        if (weather == 'dzmer') {
+            this.c = 10;
+        }
+        else if (weather == 'amar') {
+            this.c = 2;
+        }
+        else if (weather == 'ashun') {
+            this.c = 8;
+        }
+        else if (weather == 'garun') {
+            this.c = 5;
+        }
         var emptyCells = this.chooseCell(0, 1);
-        var newCell = random(emptyCells);
-        if (newCell) {
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
+        if (newCell && this.multiply >= this.c) {
+            mrgjunbaz++;
             this.energy = 12;
             var newX = newCell[0];
             var newY = newCell[1];
@@ -35,6 +61,8 @@ module.exports=class mrgjun extends all {
             mrgjunArr.push(newmrgjun);
 
         }
+
+
 
     }
     die() {
@@ -48,7 +76,8 @@ module.exports=class mrgjun extends all {
     }
     move() {
         var emptyCells = this.chooseCell(0, 1);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
         if (newCell) {
             this.energy--;
             var newX = newCell[0];
@@ -66,7 +95,8 @@ module.exports=class mrgjun extends all {
     }
     eat() {
         var emptyCells = this.chooseCell(7, 1);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -86,7 +116,8 @@ module.exports=class mrgjun extends all {
 
         else {
             var emptyCells = this.chooseCell(7, 2);
-            var newCell = random(emptyCells);
+            var index = Math.floor(Math.random() * emptyCells.length);
+            var newCell = emptyCells[index];
             if (newCell) {
 
 
@@ -107,10 +138,11 @@ module.exports=class mrgjun extends all {
             }
             else {
                 var emptyCells = this.chooseCell(7, 3);
-                var newCell = random(emptyCells);
+
                 if (newCell) {
 
-                    var newCell = random(emptyCells);
+                    var index = Math.floor(Math.random() * emptyCells.length);
+                    var newCell = emptyCells[index];
                     var newX = newCell[0];
                     var newY = newCell[1];
                     matrix[newY][newX] = 4;
@@ -126,6 +158,18 @@ module.exports=class mrgjun extends all {
                         }
                     }
 
+                }
+                if (weather == 'dzmer') {
+                    this.c = 4;
+                }
+                else if (weather == 'amar') {
+                    this.c = 13;
+                }
+                else if (weather == 'ashun') {
+                    this.c = 8;
+                }
+                else if (weather == 'garun') {
+                    this.c = 8;
                 }
 
                 else {

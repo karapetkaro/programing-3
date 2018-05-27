@@ -1,9 +1,9 @@
 var all = require("./yndanur.js");
-module.exports=class oxar extends all{
+module.exports = class oxar extends all {
     constructor(x, y, index) {
         super(x, y, index);
         this.energy = 8;
-
+        this.c = 6;
 
     }
 
@@ -33,8 +33,12 @@ module.exports=class oxar extends all{
 
 
     move() {
+
+
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
+
         if (newCell) {
             this.energy--;
             var newX = newCell[0];
@@ -52,9 +56,12 @@ module.exports=class oxar extends all{
     }
 
     mul() {
+
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
         if (newCell) {
+            ochxarbaz++;
             this.energy = 6;
             var newX = newCell[0];
             var newY = newCell[1];
@@ -62,13 +69,18 @@ module.exports=class oxar extends all{
             var newochxar = new oxar(newX, newY, this.index);
             ochxarArr.push(newochxar);
 
+
         }
+
+
+
 
     }
 
     utel() {
         var emptyCells = this.chooseCell(1);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
         if (newCell) {
             this.energy++;
             var newX = newCell[0];
@@ -85,6 +97,19 @@ module.exports=class oxar extends all{
                     break;
                 }
             }
+            if (weather == 'dzmer') {
+                this.c = 6;
+            }
+            else if (weather == 'amar') {
+                this.c = 10;
+            }
+            else if (weather == 'ashun') {
+                this.c = 4;
+            }
+            else if (weather == 'garun') {
+                this.c = 8;
+            }
+
 
 
             if (this.energy >= 12) {

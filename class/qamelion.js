@@ -1,9 +1,10 @@
 var all = require("./yndanur.js");
-module.exports=class qameljon extends all {
+module.exports = class qameljon extends all {
     constructor(x, y, index) {
         super(x, y, index);
         this.energy = 12;
         this.caneat = true;
+        this.c = 4;
 
     }
     tarmacnel() {
@@ -33,7 +34,8 @@ module.exports=class qameljon extends all {
         this.cheke();
         if (this.caneat) {
             var emptyCells = this.chooseCell(1);
-            var newCell = random(emptyCells);
+            var index = Math.floor(Math.random() * emptyCells.length);
+            var newCell = emptyCells[index];
             if (newCell) {
                 this.energy++;
                 var newX = newCell[0];
@@ -50,6 +52,18 @@ module.exports=class qameljon extends all {
                         break;
                     }
                 }
+                if (weather == 'dzmer') {
+                    this.c = 4;
+                }
+                else if (weather == 'amar') {
+                    this.c = 13;
+                }
+                else if (weather == 'ashun') {
+                    this.c = 8;
+                }
+                else if (weather == 'garun') {
+                    this.c = 8;
+                }
 
 
                 if (this.energy >= 20) {
@@ -64,7 +78,8 @@ module.exports=class qameljon extends all {
 
     move() {
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
         if (newCell) {
             this.energy--;
             var newX = newCell[0];
@@ -82,9 +97,13 @@ module.exports=class qameljon extends all {
     }
 
     mul() {
+
+
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var index = Math.floor(Math.random() * emptyCells.length);
+        var newCell = emptyCells[index];
         if (newCell) {
+            qamelionbaz++;
             this.energy = 12;
             var newX = newCell[0];
             var newY = newCell[1];
@@ -93,6 +112,7 @@ module.exports=class qameljon extends all {
             qameljonArr.push(newqameljon);
 
         }
+
 
     }
     die() {
